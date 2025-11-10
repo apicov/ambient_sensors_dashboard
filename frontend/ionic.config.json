@@ -1,0 +1,7 @@
+{
+  "name": "sensor-dashboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
