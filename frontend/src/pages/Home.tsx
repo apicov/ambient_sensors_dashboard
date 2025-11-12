@@ -51,6 +51,17 @@ const getMetricColor = (metricType: string) => {
   return colors[index];
 };
 
+const formatTime = (timestamp: string) => {
+  const date = new Date(timestamp);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins} min ago`;
+  if (diffMins < 1440) return `${Math.floor(diffMins / 60)} hours ago`;
+  return date.toLocaleString();
+};
 
 const Home: React.FC = () => {
   const [sensors, setSensors] = useState<Sensor[]>([]);
@@ -141,7 +152,10 @@ const Home: React.FC = () => {
                       color={checkMetricThresholds(reading)}
                     />
                   ))}
-                  </div>
+            </div>
+            <p style={{ marginTop: '12px', fontSize: '0.85em', color: 'gray' }}>
+              Last update: {formatTime(readings[0].time)}
+            </p>
             </IonCardContent>
             </IonCard>
           ))}
