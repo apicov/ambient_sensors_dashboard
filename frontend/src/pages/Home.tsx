@@ -113,6 +113,8 @@ const Home: React.FC = () => {
   }
 
   const checkMetricThresholds = (reading: SensorReading) => {
+    if (reading.good_max === null)
+      return 'success'
     if (reading.value >= reading.good_min && 
       reading.value <= reading.good_max)
         return 'success'; // green color
